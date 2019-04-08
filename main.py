@@ -1,12 +1,13 @@
 import sys
 from PyQt5.QtWidgets import QApplication, QMainWindow
-from login import *
+from loginWindows import *
+from mainWindows import *
 from PyQt5.QtCore import Qt
 
 
-class MyWindow(QMainWindow, Ui_MainWindow):
+class login(QMainWindow, Ui_MainWindow_Login):
     def __init__(self, parent=None):
-        super(MyWindow, self).__init__(parent)
+        super(login, self).__init__(parent)
         self.setupUi(self)
 
         self.name = ''
@@ -65,6 +66,8 @@ class MyWindow(QMainWindow, Ui_MainWindow):
                     self.success.setWordWrap(True)
                     self.success.setAlignment(Qt.AlignCenter)
                     land_flag += 1
+                    mainWindows_show.show()
+                    login_show.hide()
 
                 elif (self.name == line.strip('\n').split(' ')[0]) and (self.password != line.strip('\n').split(' ')[1]):
                     self.success.setText('密码错误，请重新输入')
@@ -81,10 +84,18 @@ class MyWindow(QMainWindow, Ui_MainWindow):
                 self.success.adjustSize()
                 self.success.setWordWrap(True)
                 self.success.setAlignment(Qt.AlignCenter)
+            f.close()
+
+
+class mainWindows(QMainWindow, Ui_MainWindow_Main):
+    def __init__(self, parent=None):
+        super(mainWindows, self).__init__(parent)
+        self.setupUi(self)
 
 
 if __name__ == '__main__':
     app = QApplication(sys.argv)
-    myWin = MyWindow()
-    myWin.show()
+    login_show = login()
+    login_show.show()
+    mainWindows_show = mainWindows()
     sys.exit(app.exec_())
