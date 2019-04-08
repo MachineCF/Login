@@ -7,6 +7,7 @@
 # WARNING! All changes made in this file will be lost!
 
 from PyQt5 import QtCore, QtGui, QtWidgets
+from PyQt5.QtWidgets import (QMessageBox, QLineEdit)
 
 class Ui_MainWindow_Login(object):
     def setupUi(self, MainWindow):
@@ -91,6 +92,8 @@ class Ui_MainWindow_Login(object):
 
         self.name_edit.textChanged['QString'].connect(self.saveName)
         self.password_edit.textChanged['QString'].connect(self.savePassword)
+        # 设置为..
+        self.password_edit.setEchoMode(QLineEdit.Password)
         self.registerUser.clicked.connect(self.register)
         self.landUser.clicked.connect(self.land)
 
